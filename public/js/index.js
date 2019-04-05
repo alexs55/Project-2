@@ -1,6 +1,7 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $userName = $("#userName");
+var $subject = $("#subject");
+var $userPost = $("#userPost");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
@@ -63,13 +64,15 @@ var refreshExamples = function() {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-
+  //grab user's input value & store it in a variable in an object format
+  //change example to user
   var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    name: $userName.val().trim(),
+    subject: $subject.val().trim(),
+    inputText: $userPost.val().trim()
   };
 
-  if (!(example.text && example.description)) {
+  if (!(example.name && example.subject && example.inputText)) {
     alert("You must enter an example text and description!");
     return;
   }
@@ -77,9 +80,10 @@ var handleFormSubmit = function(event) {
   API.saveExample(example).then(function() {
     refreshExamples();
   });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
+  //clear input fields
+  $userName.val("");
+  $subject.val("");
+  $userPost.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
