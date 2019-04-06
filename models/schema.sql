@@ -1,12 +1,3 @@
 DROP DATABASE IF EXISTS atx_db;
 CREATE DATABASE atx_db;
 USE atx_db;
-
-CREATE TABLE posts
-(
-	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	post varchar(255) NOT NULL,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    latitude DECIMAL(10, 8) NOT NULL, 
-    longitude DECIMAL(10, 8) NOT NULL 
-);
