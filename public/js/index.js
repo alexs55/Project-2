@@ -3,6 +3,7 @@ var $userName = $("#userName");
 var $subject = $("#subject");
 var $userPost = $("#userPost");
 var $submitBtn = $("#submit");
+//we might not need line 7
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
