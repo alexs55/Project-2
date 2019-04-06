@@ -172,76 +172,115 @@ function googleMap() {
   //    updates the content of the map
   infoWindow = new google.maps.InfoWindow();
 
-  // structure of the db
-  var result = {
-    post: [
-      {
-        body: {
-          title: "the master",
-          text: "my name is alex"
-        },
-        latitude: 30.38727219999997,
-        longitude: -97.726508
-      },
-      {
-        body: {
-          title: "the master",
-          text: "my name is alex"
-        },
-        latitude: 30.267153,
-        longitude: -97.743057
-      },
-      {
-        body: {
-          title: "the master",
-          text: "my name is alex"
-        },
-        latitude: 30.387272199999995,
-        longitude: -95.726508
-      },
-      {
-        body: {
-          title: "the master",
-          text: "my name is alex"
-        },
-        latitude: 30.387272199999994,
-        longitude: -94.726508
-      },
-      {
-        body: {
-          title: "the master",
-          text: "my name is alex"
-        },
-        latitude: 30.387272199999993,
-        longitude: -97.726508
-      }
-    ]
-  };
+  // var result = post: [];
+  var apiResults = [];
+  API.getPosts().then(function(response) {
+    console.log(response);
+    response.forEach(function(post) {
+      console.log("in loop");
+      //     var result = {
+      // post: [
+      //   {
+      //     body: {
+      //       title: "the master",
+      //       text: "my name is alex"
+      //     },
+      //     latitude: 30.38727219999997,
+      //     longitude: -97.726508
+      //   },
+      var pst = {
+        title: "title goes here",
+        text: post.post,
+        latitude: post.latitude,
+        longitude: post.longitude
+      };
 
-  showSteps(result, postArray, postDisplay, map);
+      // datapoint.body.text = post.post;
+      // datapoint.longitude = post.longitude;
+      // datapoint.latitude = post.latitude;
+      apiResults.push(pst);
+    });
+
+    console.log("RESULT:::", apiResults);
+    showSteps(apiResults, postArray, postDisplay, map);
+  });
+
+  // structure of the db
+  // var result = {
+  //   post: [
+  //     {
+  //       body: {
+  //         title: "the master",
+  //         text: "my name is alex"
+  //       },
+  //       latitude: 30.38727219999997,
+  //       longitude: -97.726508
+  //     },
+  //     {
+  //       body: {
+  //         title: "the master",
+  //         text: "my name is alex"
+  //       },
+  //       latitude: 30.267153,
+  //       longitude: -97.743057
+  //     },
+  //     {
+  //       body: {
+  //         title: "the master",
+  //         text: "my name is alex"
+  //       },
+  //       latitude: 30.387272199999995,
+  //       longitude: -95.726508
+  //     },
+  //     {
+  //       body: {
+  //         title: "the master",
+  //         text: "my name is alex"
+  //       },
+  //       latitude: 30.387272199999994,
+  //       longitude: -94.726508
+  //     },
+  //     {
+  //       body: {
+  //         title: "the master",
+  //         text: "my name is alex"
+  //       },
+  //       latitude: 30.387272199999993,
+  //       longitude: -97.726508
+  //     }
+  //   ]
+  // };
+
+  // showSteps(apiResults, postArray, postDisplay, map);
+  console.log("apiResults lenth", apiResults.length);
   function showSteps(result, postArray, postDisplay, map) {
+    console.log("Map result", result);
     // For each step, place a marker, and add the text to the marker's infowindow.
     // Also attach the marker to an array so we can keep track of it and remove it
     // when calculating new routes.
 
     // this will be the template fo google maps API to render the table parameters
-    var listPost = result.post;
+    console.log(result);
 
-    console.log(listPost[0].body);
-    for (var i = 0; i < listPost.length; i++) {
+    // console.log(listPost[0].body);
+    console.log("length", result.length);
+    console.log("BEFORE LOOP ");
+    for (var i = 0; i < result.length; i++) {
+      console.log("MAP LOOP " + i);
       myLatlng = new google.maps.LatLng(
-        listPost[i].latitude,
-        listPost[i].longitude
+        result[i].latitude,
+        result[i].longitude
       );
       var post = (postArray[i] = postArray[i] || new google.maps.Marker());
       post.setMap(map);
       console.log("hey");
+      console.log(myLatlng);
       post.setPosition(myLatlng);
       attachInstructionText(
         postDisplay,
         post,
-        listPost[i].body.title,
-        listPost[i].body.text,
+        result[i].title,
+        result[i].text,
         map
       );
       //   body meant to be the post object that includes the name and the text
