@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "process.env.MYSQL_PASSWORD",
+    "password": "Exito2019*",
     "database": "atx_db",
     "host": "localhost",
     "dialect": "mysql"
