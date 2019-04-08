@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Exito2019*",
+    "password": "yourPassword",
     "database": "atx_db",
     "host": "localhost",
     "dialect": "mysql"
