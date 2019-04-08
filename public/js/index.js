@@ -3,16 +3,6 @@ var $userName = $("#userName");
 var $subject = $("#subject");
 var $userPost = $("#userPost");
 var $submitBtn = $("#submit");
-//we might not need line 7
-var $exampleList = $("#example-list");
-
-// The API object contains methods for each kind of request we'll make
-var post = {
-  // subject: $("#subject").val().trim(),
-  post: "I am waiting for true love and my bus.",
-  latitude: 30.287648,
-  longitude: -97.727912
-};
 
 var API = {
   createPost: function(post) {
@@ -39,58 +29,63 @@ var API = {
   // }
 };
 
-API.getPosts(post).then(function(response) {
-  console.log(response);
-});
+/* ==============REVIEW THIS CODE/ DELETE IF NOT NEEDED ==================
+refreshExamples gets new examples from the db and repopulates the list
+var refreshExamples = function() {
+  API.getExamples().then(function(data) {
+    var $examples = data.map(function(example) {
+      var $a = $("<a>")
+        .text(example.text)
+        .attr("href", "/example/" + example.id);
 
-// refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function() {
-//   API.getExamples().then(function(data) {
-//     var $examples = data.map(function(example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
+      var $li = $("<li>")
+        .attr({
+          class: "list-group-item",
+          "data-id": example.id
+        })
+        .append($a);
 
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
+      var $button = $("<button>")
+        .addClass("btn btn-danger float-right delete")
+        .text("ｘ");
 
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
+      $li.append($button);
 
-//       $li.append($button);
+      return $li;
+    });
 
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
+    $exampleList.empty();
+    $exampleList.append($examples);
+  });
+};
+ ================================================================== */
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
   //grab user's input value & store it in a variable in an object format
-  //change example to user
   var post = {
     name: $userName.val().trim(),
     subject: $subject.val().trim(),
-    inputText: $userPost.val().trim()
+    post: $userPost.val().trim(),
+    latitude: userLocation.userLatitude,
+    longitude: userLocation.userLongitude
   };
 
-  if (!(example.name && example.subject && example.inputText)) {
-    alert("You must enter an example text and description!");
+  if (!(post.name && post.subject && post.post)) {
+    alert("You must enter your name, subject and post!");
     return;
   }
+  API.getPosts(post).then(function(response) {
+    console.log("API.getPost(line 101): " + response);
+    // Reload the page to get the updated list
+    location.reload();
+  });
 
   API.createPost(post).then(function() {
-    refreshExamples();
+    // refreshExamples();
+    console.log(post);
   });
   //clear input fields
   $userName.val("");
@@ -100,16 +95,17 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+// var handleDeleteBtnClick = function() {
+//   var idToDelete = $(this)
+//     .parent()
+//     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
+//   API.deleteExample(idToDelete).then(function() {
+//     // refreshExamples();
+//   });
+// };
 
+// ==================== GOOGLE MAPS API ==============
 var userLocation = {};
 function getLocation() {
   if (navigator.geolocation) {
@@ -119,7 +115,11 @@ function getLocation() {
     console.log("Your browser does not support Geolocation");
   }
 }
+//this is the call back function from line 131 that will be called
+//if we are able to successfully get the current location
+//this callback function takes in a parameter which is a position object
 function showPosition(position) {
+  //position object has two properties:timestamp & coordinates
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   userLocation.userLatitude = latitude;
@@ -159,7 +159,7 @@ function googleApiCall() {
 function googleMap() {
   var map;
 
-  //    starting directions services
+  //starting directions services
   var postArray = [];
 
   map = new google.maps.Map(document.getElementById("map"), {
@@ -178,26 +178,13 @@ function googleMap() {
     console.log(response);
     response.forEach(function(post) {
       console.log("in loop");
-      //     var result = {
-      // post: [
-      //   {
-      //     body: {
-      //       title: "the master",
-      //       text: "my name is alex"
-      //     },
-      //     latitude: 30.38727219999997,
-      //     longitude: -97.726508
-      //   },
       var pst = {
-        title: "title goes here",
+        name: post.name,
+        subject: post.subject,
         text: post.post,
         latitude: post.latitude,
         longitude: post.longitude
       };
-
-      // datapoint.body.text = post.post;
-      // datapoint.longitude = post.longitude;
-      // datapoint.latitude = post.latitude;
       apiResults.push(pst);
     });
 
@@ -260,7 +247,7 @@ function googleMap() {
     // when calculating new routes.
 
     // this will be the template fo google maps API to render the table parameters
-    console.log(result);
+    // console.log(result);
 
     // console.log(listPost[0].body);
     console.log("length", result.length);
@@ -279,7 +266,8 @@ function googleMap() {
       attachInstructionText(
         postDisplay,
         post,
-        result[i].title,
+        result[i].name,
+        result[i].subject,
         result[i].text,
         map
       );
@@ -287,14 +275,25 @@ function googleMap() {
     }
   }
 
-  function attachInstructionText(postDisplay, post, title, text, map) {
+  function attachInstructionText(postDisplay, post, name, subject, text, map) {
     console.log("hello");
 
     google.maps.event.addListener(post, "click", function() {
       // Open an info window when the marker is clicked on, containing the text
       // of the step.
       postDisplay.setContent(
-        "<h1>" + title + "</h1>" + "<br>" + "<p>" + text + "</p>"
+        //html to be inserted in the marker's pop-up box
+        "<h3>" +
+          name +
+          "</h3>" +
+          "<br>" +
+          "<p>" +
+          subject +
+          "</p>" +
+          "<br>" +
+          "<p>" +
+          text +
+          "</p>"
       );
       postDisplay.open(map, post);
     });
@@ -303,4 +302,4 @@ function googleMap() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
