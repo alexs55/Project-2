@@ -134,7 +134,8 @@ function googleApiCall() {
   console.log("making api call");
   var url =
     "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-  var apiKey = "AIzaSyCUM6ziq10bpobC1rqrO3O9LGJwgzUTJEA";
+  //secure Google Maps Api key by saving the password in the .env file & referencing to it in line 138
+  var apiKey = "process.env.API_PASSWORD";
   var combinedLocation =
     userLocation.userLatitude + "," + userLocation.userLongitude;
 
