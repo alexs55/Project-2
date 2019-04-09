@@ -106,6 +106,12 @@ var handleFormSubmit = function(event) {
 // };
 
 // ==================== GOOGLE MAPS API ==============
+// var googlemapscdn = document.createElement("script");
+// googlemapscdn.setAttribute(
+//   "src",
+//   "https://maps.googleapis.com/maps/api/js?key=" + apiKey
+// );
+// document.head.appendChild(googlemapscdn);
 var userLocation = {};
 function getLocation() {
   if (navigator.geolocation) {
@@ -135,14 +141,13 @@ function googleApiCall() {
   var url =
     "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   //secure Google Maps Api key by saving the password in the .env file & referencing to it in line 138
-  var apiKey = "process.env.API_PASSWORD";
   var combinedLocation =
     userLocation.userLatitude + "," + userLocation.userLongitude;
 
   console.log("Returned Lat and Long is " + combinedLocation);
   $.ajax(url, {
     data: {
-      key: apiKey,
+      key: "AIzaSyCUM6ziq10bpobC1rqrO3O9LGJwgzUTJEA",
       location: combinedLocation,
       radius: 10000
       // 'keyword': userSelection.subCategorySelection,
@@ -243,6 +248,11 @@ function googleMap() {
   console.log("apiResults lenth", apiResults.length);
   function showSteps(result, postArray, postDisplay, map) {
     console.log("Map result", result);
+    var oms = new OverlappingMarkerSpiderfier(map, {
+      markersWontMove: true,
+      markersWontHide: true,
+      basicFormatEvents: true
+    });
     // For each step, place a marker, and add the text to the marker's infowindow.
     // Also attach the marker to an array so we can keep track of it and remove it
     // when calculating new routes.
@@ -260,7 +270,7 @@ function googleMap() {
         result[i].longitude
       );
       var post = (postArray[i] = postArray[i] || new google.maps.Marker());
-      post.setMap(map);
+      oms.addMarker(post);
       console.log("hey");
       console.log(myLatlng);
       post.setPosition(myLatlng);
@@ -279,7 +289,7 @@ function googleMap() {
   function attachInstructionText(postDisplay, post, name, subject, text, map) {
     console.log("hello");
 
-    google.maps.event.addListener(post, "click", function() {
+    google.maps.event.addListener(post, "spider_click", function() {
       // Open an info window when the marker is clicked on, containing the text
       // of the step.
       postDisplay.setContent(
