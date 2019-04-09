@@ -5,8 +5,8 @@ module.exports = function(sequelize, DataTypes) {
       name: DataTypes.STRING,
       subject: DataTypes.STRING,
       post: DataTypes.STRING,
-      longitude: DataTypes.DOUBLE(8, 3),
-      latitude: DataTypes.DOUBLE(8, 3)
+      longitude: DataTypes.DOUBLE(12, 10),
+      latitude: DataTypes.DOUBLE(12, 10)
       // createdAt: {
       //   type: DataTypes.DATE(3),
       //   defaultValue: sequelize.literal("CURRENT_TIMESTAMP(3)")
