@@ -7,28 +7,38 @@
 
         <!-- Insert Map Here -->
         <div class="container">
-          <div id="map"><p>Map goes here!</p></div>
+          <div id="map"></div>
+        </div>
+        <br><br>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>What is in you mind?</h3>
+          </div>
+          <div class="card-body">
+            {{!-- Insert Form inside card-body --}}
+            <!-- Form -->
+            <form class="clearfix mb-4" action="POST">
+              <!-- name -->
+              <div class="form-group">
+                <label for="example-text">Name</label>
+                <input type="text" id="userName" class="form-control" aria-describedby="example-text" placeholder="Name/nickname">
+              </div>
+              <!-- subject -->
+              <div class="form-group">
+                <label for="example-text">Subject</label>
+                <input type="text" id="subject" class="form-control" aria-describedby="example-text" placeholder="Subject">
+              </div>
+              <!-- post -->
+              <div class="form-group">
+                <label for="example-description">Post</label>
+                <textarea class="form-control" id="userPost" aria-describedby="example-description" placeholder="What is in your mind?"></textarea>
+              </div>
+              <button id="submit" class="btn btn-primary float-right">Submit</button>
+            </form>
+          </div>
         </div>
 
-        <!-- Form -->
-        <form class="clearfix mb-4" action="POST">
-          <!-- name -->
-          <div class="form-group">
-            <label for="example-text">Name</label>
-            <input type="text" id="userName" class="form-control" aria-describedby="example-text" placeholder="Name/nickname">
-          </div>
-          <!-- subject -->
-          <div class="form-group">
-            <label for="example-text">Subject</label>
-            <input type="text" id="subject" class="form-control" aria-describedby="example-text" placeholder="Subject">
-          </div>
-          <!-- post -->
-          <div class="form-group">
-            <label for="example-description">Post</label>
-            <textarea class="form-control" id="userPost" aria-describedby="example-description" placeholder="What is in your mind?"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
 
         <div class="testDiv"></div>
 

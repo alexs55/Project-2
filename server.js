@@ -10,6 +10,7 @@ var PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+// Static directory
 app.use(express.static("public"));
 
 // Handlebars
@@ -33,7 +34,7 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
-// Starting the server, syncing our models ------------------------------------/
+// Starting the server, syncing our SEQUELIZE models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
     console.log(
