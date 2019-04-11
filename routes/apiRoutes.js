@@ -1,3 +1,6 @@
+//require axios
+var axios = require("axios");
+
 //require models/post.js
 var db = require("../models");
 // var Op = Sequelize.Op;
@@ -8,6 +11,27 @@ module.exports = function(app) {
     db.Post.findAll({}).then(function(dbPost) {
       res.json(dbPost);
     });
+  });
+
+  // google maps get call
+  // we are transfering our call to google maps from the frontend (index.js) to the backend (apiRoutes.js)
+  app.get("/api/maps/:location", function(req, res) {
+    var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+    axios
+      .get(url, {
+        params: {
+          key: process.env.API_PASWORD,
+          location: req.params.location,
+          radius: 10000
+        }
+      })
+      .then(function(response) {
+        console.log("response::", response.data);
+        res.json(response.data);
+      })
+      .catch(function(err) {
+        console.log("error: ", err);
+      });
   });
 
   // Create a new example

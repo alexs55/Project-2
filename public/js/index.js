@@ -138,24 +138,12 @@ function showPosition(position) {
 getLocation();
 function googleApiCall() {
   console.log("making api call");
-  var url =
-    "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   //secure Google Maps Api key by saving the password in the .env file & referencing to it in line 138
   var combinedLocation =
     userLocation.userLatitude + "," + userLocation.userLongitude;
 
   console.log("Returned Lat and Long is " + combinedLocation);
-  $.ajax(url, {
-    data: {
-      key: "AIzaSyCUM6ziq10bpobC1rqrO3O9LGJwgzUTJEA",
-      location: combinedLocation,
-      radius: 10000
-      // 'keyword': userSelection.subCategorySelection,
-      // 'name': userSelection.typeSelection,
-      // 'opennow': true,
-      // 'rankby': 'distance',
-    }
-  }).then(function(response) {
+  $.ajax("/api/maps/" + combinedLocation).then(function(response) {
     console.log("API call received");
     console.log(JSON.parse(JSON.stringify(response)));
     googleMap();
