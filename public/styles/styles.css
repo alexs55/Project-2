@@ -6,11 +6,84 @@ h1, h2, h3 {
   text-align: center;
 }
 
+h1 {
+  color: white;
+  font-size: 70px;
+  text-shadow: 4px 4px 10px #c91d1d;
+  font-family: 'Fascinate Inline', cursive;
+}
+
+h2 {
+  color: white;
+  font-size: 35px;
+  text-shadow: 4px 4px 10px #c91d1d;
+  font-family: 'Permanent Marker', cursive;
+}
+
+h3 {
+  font-family: 'Caveat Brush', cursive;
+  font-size: 35px;
+}
+
+label {
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+}
+
+input {
+  font-family: 'Special Elite', cursive;
+  font-size: 35px;
+
+}
+
 #map {
   height: 600px;
   width: 100%;
+  border-radius: 20px 30px;
+  text-shadow: 3px 3px 5px lightseagreen;
+  border-style: solid;
+  border-color: gray;
+  background-image: url(/assets/images/markerMap.gif);
+  background-size: 100%;
+}
+
+
+#markerPopUpDiv img {
+  width: 100%;
+  height: 180px;  
+}
+
+#markerPopUpDiv {
+  background-color: black;
+  text-shadow: 4px 4px 8px red;
+  color: white;
+  text-align: center;
+
+}
+
+#markerPopUpDiv p {
+  font-family: 'Special Elite', cursive;
+  font-size: 25px;
+
+}
+
+.card {
+  border-radius: 30px;
 }
 
 .form-group {
   width: 100%
 }
+
+body {
+  background-image: url(/assets/images/3Dblue.jpg);
+}
+
+.container {
+  background-image: url(assets/images/map.jpg);
+}
+
+.jumbotron {
+  
+}
+

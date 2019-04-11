@@ -294,7 +294,8 @@ function googleMap() {
       // of the step.
       postDisplay.setContent(
         //html to be inserted in the marker's pop-up box
-        "<h3>" +
+        "<div id='markerPopUpDiv'>" +
+          "<h3>" +
           name +
           "</h3>" +
           "<br>" +
@@ -304,7 +305,9 @@ function googleMap() {
           "<br>" +
           "<p>" +
           text +
-          "</p>"
+          "</p>" +
+          "<img src=/assets/images/message.gif>" +
+          "</div>"
       );
       postDisplay.open(map, post);
     });
