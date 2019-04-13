@@ -20,7 +20,7 @@ module.exports = function(app) {
     axios
       .get(url, {
         params: {
-          key: process.env.API_PASWORD,
+          key: process.env.API_PASSWORD,
           location: req.params.location,
           radius: 10000
         }
