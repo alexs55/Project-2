@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="display-4">{{msg}}</h1>
+        <h1 class="display-4">GetClose {{msg}}</h1>
         <h2>Find out what's happening in your area!</h2>
 
         <!-- Insert Map Here -->
@@ -13,7 +13,8 @@
 
         <div class="card">
           <div class="card-header">
-            <h3>What's on your mind?</h3>
+            {{!-- <h3>What's on your mind?</h3> --}}
+            <h6>What's on your mind?</h6>
           </div>
           <div class="card-body">
             {{!-- Insert Form inside card-body --}}
@@ -22,7 +23,7 @@
               <!-- name -->
               <div class="form-group">
                 <label for="example-text">Name</label>
-                <input type="text" id="userName" class="form-control" aria-describedby="example-text" placeholder="Name/nickname">
+                <input type="text" id="userName" class="form-control" aria-describedby="example-text" placeholder="Username">
               </div>
               <!-- subject -->
               <div class="form-group">

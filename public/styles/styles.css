@@ -6,66 +6,85 @@ h1, h2, h3 {
   text-align: center;
 }
 
-h1 {
-  color: white;
+/* h1 {
   font-size: 70px;
-  text-shadow: 4px 4px 10px #c91d1d;
-  font-family: 'Fascinate Inline', cursive;
 }
 
 h2 {
-  color: white;
   font-size: 35px;
-  text-shadow: 4px 4px 10px #c91d1d;
-  font-family: 'Permanent Marker', cursive;
 }
 
 h3 {
-  font-family: 'Caveat Brush', cursive;
   font-size: 45px;
-}
+} */
 
-label {
-  font-family: 'Caveat', cursive;
+/* label {
   font-size: 30px;
-}
+} */
 
+/* 
 input {
-  font-family: 'Special Elite', cursive;
   font-size: 35px;
-
-}
+} */
 
 #map {
   height: 600px;
   width: 100%;
   border-radius: 20px 30px;
-  text-shadow: 3px 3px 5px lightseagreen;
   border-style: solid;
   border-color: gray;
-  background-image: url(/assets/images/markerMap.gif);
   background-size: 100%;
 }
 
-
-#markerPopUpDiv img {
+/* 
+#postMarker img {
   width: 100%;
   height: 180px;  
 }
 
-#markerPopUpDiv {
-  background-color: black;
-  text-shadow: 4px 4px 8px red;
-  color: white;
+#postMarker {
   text-align: center;
-
 }
 
-#markerPopUpDiv p {
-  font-family: 'Special Elite', cursive;
-  font-size: 25px;
+#postMarker p {
+  font-size: 10px;
+} */
 
+
+.postMarker {
+  line-height: 10px;  
 }
+
+.pinUsername {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.pinSubject {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.pinPost {
+  font-size: 12px;
+}
+
+ /* Pin Posts Styling */
+/* .
+"<div id='postMarker'>" +
+"<p class='pinUsername'> Username: " +
+name +
+"</p>" +
+"<br>" +
+"<p class='pinSubject'>Subject: " +
+subject +
+"</p>" +
+"<br>" +
+"<p class='pinPost'>" +
+text +
+"</p>" +
+"</div>" */
+ 
 
 .card {
   border-radius: 30px;
@@ -75,10 +94,6 @@ input {
   width: 100%
 }
 
-/* body {
-  background-image: url(/assets/images/3Dblue.jpg);
-} */
-
 .container {
   background-image: url(assets/images/map.jpg);
 }
@@ -86,26 +101,14 @@ input {
 .jumbotron {
   
 }
-body{ margin:0; font:normal 75% Arial, Helvetica, sans-serif; } 
-canvas{ display: block; } /* ---- particles.js container ---- */ 
-#particles-js{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: rgb(46, 95, 185);
-  background-image: url('');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+
+body { 
+  margin:0; 
+  font:normal 75% Arial, Helvetica, sans-serif; 
 }
- /* ---- stats.js ---- */ .count-particles{ background: #160dc9fa; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; }
-.js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; }
- #stats{ border-radius: 3px 3px 0 0; overflow: hidden; }
-  .count-particles{ border-radius: 0 0 3px 3px; }
-  .body-particles{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-  }
+
+canvas{ 
+  display: block; 
+} 
+
 
